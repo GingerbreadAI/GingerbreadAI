@@ -32,7 +32,7 @@ Clone this repository to your local machine:
 git clone https://github.com/YourUsername/gingerbread-ai.git
 cd gingerbread-ai 
 ```
-## 🧑‍🤝‍🧑 GINGERBREAD AI Telegram Agent
+## GINGERBREAD AI Telegram Agent
 
 The **GINGERBREAD AI Token** project includes a fun and interactive **Telegram Agent** feature that allows your AI token to interact with users on Telegram. This agent can send and receive messages, respond to user commands, and integrate with Telegram bots for more engaging experiences.
 
@@ -49,7 +49,7 @@ The **GINGERBREAD AI Token** project includes a fun and interactive **Telegram A
 
 ---
 
-## 💬 GINGERBREAD AI Discord Agent
+## GINGERBREAD AI Discord Agent
 
 The **GINGERBREAD AI** also features a **Discord Agent** that interacts with users within Discord servers. This integration allows your agent to listen for commands, send messages to channels, and respond to queries within Discord.
 
@@ -79,7 +79,7 @@ The **GINGERBREAD AI Token** is powered by a set of key components that make it 
 
 ---
 
-## 🌍 Supported Use Cases
+## Supported Use Cases
 
 The **GINGERBREAD AI** system can be used to build a wide variety of AI-driven applications, including:
 
