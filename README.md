@@ -33,7 +33,7 @@ git clone https://github.com/YourUsername/gingerbread-ai.git
 cd gingerbread-ai 
 ```
 
-### 2. Code Overview
+## Code Overview
 
 This project consists of several key components that work together to provide the **GINGERBREAD AI Token** functionality. Below is a breakdown of the important sections of the code:
 
