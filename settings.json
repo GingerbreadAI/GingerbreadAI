@@ -1,0 +1,6 @@
+{
+  "openai_api_key": "YOUR_OPENAI_API_KEY",
+  "language": "English",
+  "timezone": "UTC",
+  "solana_api_key": "YOUR_SOLANA_API_KEY"
+}
