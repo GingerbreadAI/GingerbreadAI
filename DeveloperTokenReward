@@ -1,48 +1,84 @@
-import requests
+import base58
+from solana.rpc.api import Client
+from solana.account import Account
+from solana.transaction import Transaction
+from spl.token.client import Token
+from spl.token.constants import TOKEN_PROGRAM_ID
 
-def burn_token(user_address, token_amount, reward_percentage, reward_token_address, developer_wallet, solana_api_key):
+# Solana Cluster URL (mainnet, testnet, devnet)
+SOLANA_URL = "https://api.mainnet-beta.solana.com"  # Use the appropriate URL
+client = Client(SOLANA_URL)
+
+# Developer wallet private key (ensure you load it securely, never hardcode in production)
+developer_private_key = "YOUR_DEVELOPER_PRIVATE_KEY"  # Replace with your developer wallet's private key: once the token is launched, we will replace this section w/ an encrypted version of the dev priv key thus altering this section of the code which will be reflected post launch. this is due to the token/developer address not being set in stone as of now. all other sections remain functional before/after launch.
+developer_account = Account(base58.b58decode(developer_private_key))
+
+# Developer and user token addresses
+developer_wallet_address = developer_account.public_key()
+user_wallet_address = "USER_WALLET_ADDRESS"  # Replace with the user wallet address
+reward_token_address = "REWARD_TOKEN_ADDRESS"  # Replace with the reward token address
+
+# Function to burn a custom token and reward the user with a percentage of the developer's token balance
+def burn_token(user_wallet, token_amount, reward_percentage, reward_token_address, developer_wallet):
     """
-    Burn user-generated GINGERBREAD token and reward the user with a percentage
-    of the developer's specific token balance (from developer's wallet).
-
-    Args:
-    - user_address (str): User's wallet address.
-    - token_amount (int): Number of tokens the user wants to burn.
-    - reward_percentage (float): Percentage of the developer's token balance to reward the user.
-    - reward_token_address (str): The token address for the specific token to be rewarded.
-    - developer_wallet (str): The wallet address of the developer (from which the reward is given).
-    - solana_api_key (str): Solana API key for interacting with the blockchain.
-
-    Returns:
-    - str: Result message indicating success or failure.
+    Burn a specified amount of custom token from the user's wallet and reward them
+    with a percentage of tokens from the developer's wallet.
     """
-    # Step 1: Burn the user's tokens
-    burn_url = f"https://api.solana.com/burn?user={user_address}&amount={token_amount}&api_key={solana_api_key}"
-    burn_response = requests.post(burn_url)
+    
+    # Step 1: Burn the user's token (Custom token burn logic here)
+    # This is a placeholder for the actual burn logic.
+    # You would use a Solana SPL Token burn function here.
+    
+    print(f"Burning {token_amount} tokens from the user's wallet...")
 
-    if burn_response.status_code == 200:
-        # Step 2: Query the developer's wallet for their specific token balance
-        balance_url = f"https://api.solana.com/balance?user={developer_wallet}&token_address={reward_token_address}&api_key={solana_api_key}"
-        balance_response = requests.get(balance_url)
+    # Step 2: Calculate the reward amount (percentage of developer's token balance)
+    reward_amount = calculate_reward_amount(reward_percentage)
+    
+    # Step 3: Transfer reward tokens from the developer's wallet to the user's wallet
+    transfer_tokens(reward_amount, developer_wallet, user_wallet, reward_token_address)
+    
+    return f"Burned {token_amount} tokens. User rewarded with {reward_amount} reward tokens from the developer's wallet."
 
-        if balance_response.status_code == 200:
-            # Extract the total token balance of the specific reward token (e.g., GINGERBREAD Token)
-            balance_data = balance_response.json()
-            developer_balance = balance_data.get("balance", 0)
+# Function to calculate the reward based on a given percentage of the developer wallet's token balance
+def calculate_reward_amount(reward_percentage):
+    # Get the developer's wallet token balance (this could be done by querying the token balance from the blockchain)
+    # For the sake of simplicity, let's assume the developer has a balance of 1000 tokens for this example.
+    developer_balance = 1000  # Replace with actual balance retrieval logic
+    
+    # Calculate the reward amount based on the reward percentage
+    reward_amount = (reward_percentage / 100) * developer_balance
+    return int(reward_amount)
 
-            # Calculate the reward based on the percentage of the developer's token balance
-            reward_amount = developer_balance * reward_percentage / 100
+# Function to transfer tokens from the developer wallet to the user's wallet
+def transfer_tokens(amount, developer_wallet, user_wallet, reward_token_address):
+    """
+    Transfer the calculated reward tokens from the developer's wallet to the user's wallet.
+    """
+    # Initialize the Token object using the reward token address
+    token = Token(client, reward_token_address, TOKEN_PROGRAM_ID, developer_wallet)
+    
+    # Create a transaction to transfer tokens
+    transaction = Transaction()
+    
+    # Add transfer instruction to the transaction
+    transaction.add(
+        token.transfer(
+            developer_wallet.public_key(),  # Source wallet (developer wallet)
+            user_wallet,  # Destination wallet (user wallet)
+            developer_wallet,  # Signer of the transaction (developer wallet)
+            amount  # Amount of tokens to transfer
+        )
+    )
+    
+    # Send the transaction to the Solana network
+    response = client.send_transaction(transaction, developer_wallet)
+    print(f"Transaction Sent: {response}")
 
-            # Step 3: Transfer the reward token to the user's wallet
-            reward_url = f"https://api.solana.com/transfer?user={user_address}&amount={reward_amount}&token_address={reward_token_address}&api_key={solana_api_key}"
-            reward_response = requests.post(reward_url)
+# Example usage of the burn and reward process:
+user_wallet_address = "USER_WALLET_ADDRESS"  # Replace with actual user wallet address
+reward_percentage = 10  # Reward the user with 10% of the developer's token balance
+token_amount_to_burn = 100  # The user wants to burn 100 of their custom tokens
 
-            if reward_response.status_code == 200:
-                return f"Burn successful! You've been rewarded with {reward_amount} of {reward_token_address}, which is {reward_percentage}% of the developer's balance."
-            else:
-                return "Burn successful, but reward distribution failed."
-        else:
-            return "Failed to retrieve developer's wallet balance for the specified token. Please try again."
-    else:
-        return "Burn failed. Please try again."
-
+# Perform the burn and reward process
+burn_result = burn_token(user_wallet_address, token_amount_to_burn, reward_percentage, reward_token_address, developer_account)
+print(burn_result)
