@@ -2,10 +2,14 @@
 
 $GINGERAI
 
+It's a cookie. It's a cookie. It's a cookie. 
+
+Yummy...
+
 .. ... ....... .. - ....... .--- ..- ... - ....... .- ....... - -.-- .--. .. -.-. .- .-.. ....... .- .. ....... - --- -.- . -. ..--.. ....... --- -. .-.. -.-- ....... - .... . ....... .-- .. ... . ....... .-- .. .-.. .-.. ....... -... . ....... .-. . .-- .- .-. -.. . -.. .-.-.- .-.-.- .-.-.-
 
+Our logo was created via our agent ;<
 
-Our logos created via our agent ;<
 ![alt text](https://cdn.openart.ai/uploads/image_aJ5NgePf_1735067629197_512.webp)
 
 
