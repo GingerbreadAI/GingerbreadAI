@@ -7,16 +7,16 @@
 - **Solana Blockchain Integration**: Mint, burn, and trade **GINGERBREAD Tokens** to enhance your experience.
 - **AI-Generated Art**: Generate gingerbread-themed art using AI prompts powered by OpenAI’s GPT models.
 - **Customizable Personality**: Interact with the AI in a fun and engaging way, with a unique gingerbread-inspired personality.
-- **Token Burn and Reward System** (WIP): Burn self-generated **GINGERBREAD Tokens** to receive a special, larger token tied to the project.
+- **Token Burn and Reward System** (WIP): Burn self-generated **GINGERBREAD Tokens** to receive a special, larger token tied to the project while being sent from the developer wallet.
 - **Multi-Platform Support**: Easily integrate the AI into platforms like Telegram and Discord to engage with users.
 
 ---
 
 ## Project Overview
 
-**GINGERBREAD AI** is a fun, tokenized AI experience powered by **OpenAI** and built on the **Solana blockchain**. The project allows users to engage with an AI assistant in playful and interactive ways while minting, burning, and trading **GINGERBREAD Tokens**.
+**GINGERBREAD AI** is a fun, tokenized AI experience powered by **OpenAI** and built on the **Solana blockchain**. The project allows users to engage with an AI assistant in playful and interactive ways while minting, burning, and trading **GINGERBREAD Tokens**. 
 
-As part of the project, users can burn **GINGERBREAD Tokens** to receive a larger, more powerful project token. This feature is currently in progress and will be available in future updates. Check back for updates on this feature!
+As part of the project, users can burn **GINGERBREAD Tokens** generated from the agent to receive a larger, more powerful project token from the developer wallet. 
 
 ---
 
