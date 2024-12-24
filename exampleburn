@@ -1,21 +1,15 @@
-Token Burn and Reward System (WIP)
-The GINGERBREAD Token Burn feature is currently a work in progress. This feature will allow users to burn their self-generated GINGERBREAD Tokens and receive a proportional amount of tokens from the developer wallet housing the main token associated with the GingerbreadAI Project. This functionality is not yet fully implemented, but here's an outline of how it will work once complete:
-
-Example Burn Function (WIP):
-python
-Copy code
 import requests
 
-def burn_token(user_address, token_amount, reward_percentage, user_wallet, developer_wallet, solana_api_key):
+def burn_token(user_address, token_amount, reward_percentage, reward_token_address, developer_wallet, solana_api_key):
     """
     Burn user-generated GINGERBREAD token and reward the user with a percentage
-    of the developer's GINGERBREAD token balance.
+    of the developer's specific token balance (from developer's wallet).
 
     Args:
     - user_address (str): User's wallet address.
     - token_amount (int): Number of tokens the user wants to burn.
     - reward_percentage (float): Percentage of the developer's token balance to reward the user.
-    - user_wallet (str): The wallet address of the user for burning tokens.
+    - reward_token_address (str): The token address for the specific token to be rewarded.
     - developer_wallet (str): The wallet address of the developer (from which the reward is given).
     - solana_api_key (str): Solana API key for interacting with the blockchain.
 
@@ -23,32 +17,32 @@ def burn_token(user_address, token_amount, reward_percentage, user_wallet, devel
     - str: Result message indicating success or failure.
     """
     # Step 1: Burn the user's tokens
-    burn_url = f"https://api.solana.com/burn?user={user_wallet}&amount={token_amount}&api_key={solana_api_key}"
+    burn_url = f"https://api.solana.com/burn?user={user_address}&amount={token_amount}&api_key={solana_api_key}"
     burn_response = requests.post(burn_url)
 
     if burn_response.status_code == 200:
-        # Step 2: Query the developer's wallet for their GINGERBREAD token balance
-        balance_url = f"https://api.solana.com/balance?user={developer_wallet}&api_key={solana_api_key}"
+        # Step 2: Query the developer's wallet for their specific token balance
+        balance_url = f"https://api.solana.com/balance?user={developer_wallet}&token_address={reward_token_address}&api_key={solana_api_key}"
         balance_response = requests.get(balance_url)
 
         if balance_response.status_code == 200:
-            # Extract the total token balance from the response (assuming it's in a JSON format)
+            # Extract the total token balance of the specific reward token (e.g., GINGERBREAD Token)
             balance_data = balance_response.json()
             developer_balance = balance_data.get("balance", 0)
 
             # Calculate the reward based on the percentage of the developer's token balance
             reward_amount = developer_balance * reward_percentage / 100
 
-            # Step 3: Transfer the reward to the user's wallet
-            reward_url = f"https://api.solana.com/reward?user={user_address}&amount={reward_amount}&api_key={solana_api_key}"
+            # Step 3: Transfer the reward token to the user's wallet
+            reward_url = f"https://api.solana.com/transfer?user={user_address}&amount={reward_amount}&token_address={reward_token_address}&api_key={solana_api_key}"
             reward_response = requests.post(reward_url)
 
             if reward_response.status_code == 200:
-                return f"Burn successful! You've been rewarded with {reward_amount} GINGERBREAD Tokens, which is {reward_percentage}% of the developer's balance."
+                return f"Burn successful! You've been rewarded with {reward_amount} of {reward_token_address}, which is {reward_percentage}% of the developer's balance."
             else:
                 return "Burn successful, but reward distribution failed."
         else:
-            return "Failed to retrieve developer's wallet balance. Please try again."
+            return "Failed to retrieve developer's wallet balance for the specified token. Please try again."
     else:
         return "Burn failed. Please try again."
 
