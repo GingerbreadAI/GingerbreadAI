@@ -1,9 +1,3 @@
-
----
-
-### 2. **`agent.py`**
-
-```python
 import openai
 import json
 from tasks import greet_user, tell_joke, tell_story, perform_calculation
@@ -22,7 +16,6 @@ class AIAgent:
 
     def interact(self, user_input):
         log_interaction("User", user_input)  # Log user input
-
         prompt = f"Agent {self.name} with the personality of {self.personality}, respond to: {user_input}"
         try:
             response = openai.Completion.create(
@@ -52,6 +45,26 @@ class AIAgent:
     def update_settings(self, new_settings):
         self.settings.update(new_settings)
         return "Settings updated successfully! 🔧"
+
+    def generate_image(self, prompt=None):
+        """Generate a gingerbread-related image from a text prompt using OpenAI's DALL·E."""
+        if prompt is None:
+            prompt = "A cute gingerbread man with a smiling face, standing in front of a decorated Christmas tree."
+        
+        log_interaction("User", f"Image prompt: {prompt}")  # Log the image prompt
+
+        try:
+            response = openai.Image.create(
+                prompt=prompt,
+                n=1,
+                size="1024x1024"
+            )
+            image_url = response['data'][0]['url']
+            log_interaction("Agent", f"Generated image URL: {image_url}")  # Log image URL
+            return image_url
+        except Exception as e:
+            log_interaction("Error", f"Image generation error: {str(e)}")
+            return f"Sorry, I couldn't generate an image. Error: {str(e)}"
 
 def create_agent(config_path, settings_path):
     with open(config_path, "r") as f:
