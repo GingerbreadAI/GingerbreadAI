@@ -12,7 +12,7 @@ Our logo was created via our agent ;<
 
 
 
-# Project Overview
+# The Cookie
 
 I’m small and simple, yet I’m quite key,
 Without me, sentences wouldn’t quite be.
@@ -68,7 +68,7 @@ What word am I, that sets you free?
 
 ---
 
-# Getting Started
+# The Icing
 
 Follow the steps below to set up the **GINGERBREAD AI** on your local machine:
 
@@ -83,10 +83,10 @@ cd gingerbread-ai
 ## GINGERBREAD AI Telegram Agent
 
 ### Features:
-- Responds to messages sent to your Telegram bot.
-- Handles simple text messages and predefined commands (e.g., `/hello`, `/joke`).
-- Supports interactive replies and tasks defined in your `config.json`.
-- Customizable for specific Telegram groups or channels.
+- Responds to messages sent to your Telegram bot
+- Predefined commands (e.g., `/hello`, `/joke`)
+- Interactive replies via `config.json`
+- Customizable
 
 ### How It Works:
 1. **Create a Telegram Bot**: Use [BotFather](https://core.telegram.org/bots#botfather) on Telegram to create a bot.
@@ -100,9 +100,9 @@ cd gingerbread-ai
 Gingerbread AI also features a **Discord Agent** that interacts with users within Discord servers. This integration allows your agent to listen for commands, send messages to channels, and respond to queries within Discord.
 
 ### Features:
-- Responds to commands and messages from Discord users.
-- Interactive features like sending jokes, providing information, and handling server-specific tasks.
-- Can be invited to any Discord server with the appropriate permissions.
+- Responds to users
+- Interactive replies
+- Can be invited to any Discord server 
 - Works well with both public and private channels.
 
 ### How It Works:
