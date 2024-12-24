@@ -1,6 +1,6 @@
  GINGERBREAD AI 🍪
 
-**GINGERBREAD AI** is a playful and interactive AI assistant built on the **Solana blockchain**, designed to bring the warmth and fun of gingerbread cookies to the digital world. Powered by **OpenAI**, this AI agent can perform a variety of tasks, tell gingerbread-themed jokes, and generate unique art. Users can mint, burn, and trade **GINGERBREAD Tokens** on Solana, adding a layer of blockchain integration to the experience.
+**GINGERBREAD AI** is a playful and interactive AI assistant built on the **Solana blockchain**, designed to bring the warmth and fun of gingerbread cookies to the digital world. Powered by **OpenAI**, this AI agent can perform a variety of tasks, tell gingerbread-themed jokes, and generate unique art. Users can mint, burn, and trade **GINGERBREAD Tokens** on Solana, adding a layer of blockchain integration to the experience. PS: The projects logo was created using our bot :> 
 
 ### Features
 
